@@ -14,12 +14,18 @@ import RegistrationPage from './pages/RegistrationPage'
 import LoginPage from './pages/LoginPage'
 import ContactsPage from './pages/ContactsPage'
 import HomePage from './pages/HomePage'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { refresh } from './redux/auth/operations'
 
 
 
 function App() {
   
-
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(refresh())
+  },[dispatch])
 
   return (
     <Routes>

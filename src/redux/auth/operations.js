@@ -43,3 +43,21 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkApi) => {
     }
 })
 
+
+export const refresh = createAsyncThunk("auth/refresh", async (_, thunkApi) => {
+    try {
+        const savedToken = thunkApi.getState().auth.token
+
+        if (!savedToken) {
+            return thunkApi.rejectWithValue('Token not found!')
+        }
+
+        setAuthHeader(savedToken)
+        
+        const { data } = await goitApi.get('/users/current')
+        return data
+    } catch (error) {
+        return thunkApi.rejectWithValue(error.message)
+    }
+})
+

@@ -23,7 +23,7 @@ const RegistrationPage = () => {
   return (
     <>
 <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-  <Form>
+  <Form className="p-20 w-1/4">
     <label className="input input-bordered flex items-center gap-2">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +61,7 @@ const RegistrationPage = () => {
       </svg>
       <Field name='password' type="password" className="grow" placeholder="Password" />
           </label>
-          <button type="submit">Register</button>
+          <button className="border-transparent bg-neutral-600 text-slate-100 p-5" type="submit">Register</button>
   </Form>
 </Formik>
     </>

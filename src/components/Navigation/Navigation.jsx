@@ -6,7 +6,8 @@ import { NavLink } from 'react-router-dom';
 const Navigation = () => {
 const buildLinkClass = ({ isActive }) => {
   return clsx('text-slate-100', isActive && 'text-red-600');
-};
+  };
+  
 
   return (
       <>
@@ -15,7 +16,7 @@ const buildLinkClass = ({ isActive }) => {
                   <li className={s.item}>
                     <NavLink className={buildLinkClass} to="/">Home</NavLink>
                 </li>
-                  <li className={s.item}>
+                    <li className={s.item}>
                     <NavLink className={buildLinkClass} to="/contacts">Contacts</NavLink>
                 </li>
               </ul>

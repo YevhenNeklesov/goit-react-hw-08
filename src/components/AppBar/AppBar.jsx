@@ -11,11 +11,8 @@ const AppBar = () => {
   return (
       <div className='bg-neutral-600 flex gap-x-4 p-5 justify-between mb-10'>
           <Navigation />
-          <AuthNav />
-          {isLoggedIn &&
-              <button
-                  className="text-slate-100"
-                  onClick={() => dispatch(logout())}>Log Out</button>}
+          {!isLoggedIn && <AuthNav />}
+          {isLoggedIn && <button className="text-slate-100" onClick={() => dispatch(logout())}>Log Out</button>}
 </div>
   )
 }

@@ -1,10 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { goitApi } from "../auth/operations";
+import { goitApi, refresh} from "../auth/operations";
 
 
 
 export const fetchContacts = createAsyncThunk("contacts/fetchAll", async (_, thunkApi) => {
     try {
+        await refresh()
         const { data } = await goitApi.get('contacts')
         return data
     } catch (err) {
@@ -23,6 +24,7 @@ export const addContact = createAsyncThunk("contacts/addContact", async (body, t
 
 export const deleteContact = createAsyncThunk("contacts/deleteContact ", async (id, thunkApi) => {
     try {
+        
         const { data } = await goitApi.delete(`contacts/${id}`)
         return data.id
     } catch (err) {
