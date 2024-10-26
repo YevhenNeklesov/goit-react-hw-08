@@ -5,13 +5,13 @@ import { NavLink } from 'react-router-dom';
 
 const Navigation = () => {
 const buildLinkClass = ({ isActive }) => {
-  return clsx('text-slate-100', isActive && 'text-red-600');
+  return clsx(s.unActive, isActive && s.active);
   };
   
 
   return (
       <>
-          <nav>
+          <nav className='flex  items-center'>
               <ul className='flex gap-x-4'>
                   <li className={s.item}>
                     <NavLink className={buildLinkClass} to="/">Home</NavLink>

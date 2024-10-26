@@ -15,10 +15,10 @@ const persistConfig = {
 
 
 export const store = configureStore({
-    reducer: {
+  reducer: {
+        auth: persistReducer(persistConfig, authSlice),
         contact: contactsReducer,
         filter: filtersReducer,
-        auth: persistReducer(persistConfig, authSlice),
     },
     middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

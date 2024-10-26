@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 const AuthNav = () => {
 
   const buildLinkClass = ({ isActive }) => {
-  return clsx('text-slate-100', isActive && 'text-red-600');
+  return clsx(s.unActive, isActive && s.active);
 };
   return (
       <>

@@ -1,22 +1,18 @@
 
 import './App.css'
-// import ContactForm from './components/ContactForm/ContactForm'
-// import SearchBox from './components/SearchBox/SearchBox'
-// import ContactList from './components/ContactList/ContactList'
-// import { useDispatch } from 'react-redux'
-// import { useEffect } from 'react'
-// import { fetchContacts } from './redux/contacts/operations'
-// import { selectError, selectLoading } from './redux/contacts/slice'
 import { Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout/Layout'
 import NotFound from './pages/NotFound'
-import RegistrationPage from './pages/RegistrationPage'
 import LoginPage from './pages/LoginPage'
 import ContactsPage from './pages/ContactsPage'
 import HomePage from './pages/HomePage'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { refresh } from './redux/auth/operations'
+import { selectIsRefreshing } from './redux/auth/selectors'
+import { PrivateRoute } from './components/PrivateRoute'
+import { RestrictedRoute } from './components/RestrictedRoute'
+import RegistrationPage from './pages/RegistrationPage'
 
 
 
@@ -25,20 +21,19 @@ function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(refresh())
-  },[dispatch])
+  }, [dispatch])
+  
+  const isRefreshing = useSelector(selectIsRefreshing)
 
-  return (
+  return isRefreshing ? null : (
     <Routes>
       <Route path='/' element={<Layout/>}>
-        <Route index element={<HomePage/>} />
-        <Route path='/register' element={<RegistrationPage/>} />
-        <Route path='/login' element={<LoginPage/>}/>
-        <Route path='/contacts' element={<ContactsPage/>}/>
-        
-      </Route>
-      <Route path='*' element={<NotFound />} />
+        <Route index element={<HomePage />} />
+        <Route path='/contacts' element={<PrivateRoute component={<ContactsPage />} redirectTo='/login'/>} />
+        <Route path='/register' element={<RestrictedRoute component={<RegistrationPage/>} redirectTo='/contacts'/>} />
+        <Route path='/login' element={<RestrictedRoute component={<LoginPage/>} redirectTo='/contacts'/>}/>
+      <Route path='*' element={<NotFound />} /></Route>
     </Routes>
-
   )
 }
 

@@ -5,18 +5,18 @@ import s from './SearchBox.module.css'
 
 const SearchBox = () => {
   const dispatch = useDispatch()
-  const filter = useSelector(selectNameFilter)
+  const filterName = useSelector(selectNameFilter)
   return (
-      <div className={s.container}>
-          <label className={s.label}>Search contact
+    <div className={s.container}>
+      <label className="form-control w-full max-w-xs m-auto">
+    <span className="text-slate-200 font-bold mb-4">Search contact</span>
         <input
-          className={s.input}
-          placeholder="Enter contact name"
           type="text"
-          value={filter}
-          onChange={e => dispatch(changeFilter(e.target.value))}
-        />
-          </label>
+          placeholder="Enter contact name" 
+          className="input input-bordered text-black w-full max-w-xs"
+          value={filterName}
+          onChange={(e => dispatch(changeFilter(e.target.value)))} />
+</label>
     </div>
   )
 }

@@ -18,14 +18,31 @@ const ContactForm = () => {
   return (
       <div className={s.container}>
           <Formik initialValues={initialValues} onSubmit={onSubmit}>
-              <Form className={s.form}>
-                  <Field className={s.input} name='name' placeholder='Enter contact name' />
-                  <Field className={s.input} type='tel' name='number' placeholder='Enter contact phone number'/>           
-                  <button className={s.btn} type="submit">Add contact</button>
+              <Form className="w-80 flex-col flex gap-5 m-auto pb-20">
+        <label className="form-control w-full max-w-xs">
+    <span className="text-slate-200 font-bold mb-4">Contact name</span>
+        <Field
+          type="text"
+          name="name"
+          placeholder="Enter contact name" 
+          className="input input-bordered text-black w-full max-w-xs"/>
+        </label>
+                        <label className="form-control w-full max-w-xs">
+    <span className="text-slate-200 font-bold mb-4">Contact phone</span>
+        <Field
+          type="tel"
+          name="number"
+          placeholder="Enter contact phone number" 
+          className="input input-bordered text-black w-full max-w-xs"/>
+        </label>
+        <button className="border-transparent bg-red-900 text-slate-100 px-20 m-auto  py-3 rounded-md" type="submit">Add contact</button>
               </Form>
           </Formik>
     </div>
   )
 }
 
-export default ContactForm
+export default ContactForm         
+                  
+
+
