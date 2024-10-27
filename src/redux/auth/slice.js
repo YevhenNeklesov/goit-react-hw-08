@@ -44,7 +44,7 @@ const slice = createSlice({
         state.isRefreshing = false
       })
     
-      .addMatcher(isAnyOf(register.rejected, login.rejected, logout.rejected), (state, action) => {
+      .addMatcher(isAnyOf(register.rejected, login.rejected, logout.rejected), () => {
                 toast.error('Something went wrong, please try again.', {
                      position: "bottom-left"
                 })
