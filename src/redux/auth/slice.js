@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, isAnyOf } from "@reduxjs/toolkit"
 import { login, logout, refresh, register } from "./operations"
+import toast from "react-hot-toast"
 
 
 
@@ -41,6 +42,12 @@ const slice = createSlice({
       })
       .addCase(refresh.rejected, state => {
         state.isRefreshing = false
+      })
+    
+      .addMatcher(isAnyOf(register.rejected, login.rejected, logout.rejected), (state, action) => {
+                toast.error('Something went wrong, please try again.', {
+                     position: "bottom-left"
+                })
       })
     }
 })

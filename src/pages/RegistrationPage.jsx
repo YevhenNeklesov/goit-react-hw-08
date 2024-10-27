@@ -2,6 +2,7 @@ import { Field, Form, Formik } from "formik"
 import { useDispatch } from "react-redux"
 import { register } from "../redux/auth/operations"
 import { Link } from "react-router-dom"
+import toast from "react-hot-toast"
 
 
 
@@ -17,6 +18,12 @@ const RegistrationPage = () => {
   }
 
   const handleSubmit = (values, options) => {
+        if (!values.email || !values.password || !values.password) {
+          return toast('Please fill the all fields', {
+          icon: '🟡',
+          position: "bottom-left"
+        })
+    }
     dispatch(register(values))
     options.resetForm()
   }
