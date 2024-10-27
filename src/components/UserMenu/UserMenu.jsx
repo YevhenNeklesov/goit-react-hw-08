@@ -10,7 +10,7 @@ const UserMenu = () => {
 
     const dispatch = useDispatch()
   return (
-      <div className="flex w-full justify-between ml-40">
+      <div className="flex w-full justify-between">
               <p className="text-slate-200 text-2xl ">Welcome {user.name}</p>
           <button className="text-slate-100 hover:text-red-600 text-xl font-bold" onClick={() => dispatch(logout())}>Log Out</button>
     </div>

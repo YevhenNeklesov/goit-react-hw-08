@@ -7,10 +7,10 @@ const Modal = ({contact}) => {
   const initialValues = {name: contact.name, number: contact.number }
   const dispatch = useDispatch()
   const id = contact.id
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, options) => {
     await dispatch(patchContact({ id, name: values.name, number: values.number }))
     dispatch(fetchContacts())
-        
+    options.formReset()
     }
   return (
       <div>
@@ -35,7 +35,7 @@ const Modal = ({contact}) => {
           placeholder="Enter contact phone number" 
           className="input input-bordered text-black w-full max-w-xs"/>
         </label>
-        <button className=" border-transparent bg-red-900 text-slate-100 px-20 m-auto  py-3 rounded-md" type="submit">Edit contact</button>
+        <button className=" border-transparent bg-red-900 text-slate-100 hover:bg-red-700 px-20 m-auto  py-3 rounded-md" type="submit">Edit contact</button>
               </Form>
           </Formik>
     </div>
