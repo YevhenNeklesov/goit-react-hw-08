@@ -1,6 +1,11 @@
 import { createSelector, createSlice, isAnyOf } from "@reduxjs/toolkit"
 import {fetchContacts, addContact, deleteContact, patchContact} from './operations'
 import { selectNameFilter } from "../filters/slice"
+import toast from "react-hot-toast"
+
+
+
+
 
 const initialState = {
   contacts: {
@@ -21,13 +26,23 @@ const slice = createSlice({
             })
             .addCase(addContact.fulfilled, (state, action) => {
                 state.contacts.items.push(action.payload)
+                toast.success('Contact successfully created.', {
+                     position: "bottom-left"
+                })
             })
             .addCase(deleteContact.fulfilled, (state, action) => {
                 state.contacts.items = state.contacts.items.filter(item => item.id !== action.payload)
+                toast.success('Contact successfully deleted.', {
+                     position: "bottom-left"
+                })
             })
             .addCase(patchContact.fulfilled, (state, action) => {
-                const itemIndex = state.items.findIndex(item => item.id === action.payload.id)
-                state.items[itemIndex] = !state.items[itemIndex].completed
+                const index = state.contacts.items.findIndex(item => item.id === action.payload)
+                state.contacts.items[index] = action.payload.id
+                
+                toast.success('Contact successfully edited.', {
+                     position: "bottom-left"
+                })
             })
 
             .addMatcher(isAnyOf(fetchContacts.pending, addContact.pending, deleteContact.pending, patchContact.pending), (state) => {
@@ -39,9 +54,14 @@ const slice = createSlice({
             .addMatcher(isAnyOf(fetchContacts.rejected, addContact.rejected, deleteContact.rejected, patchContact.rejected), (state, action) => {
                 state.contacts.loading = false
                 state.contacts.error = action.payload
+                toast.error('Something went wrong, please try again.', {
+                     position: "bottom-left"
+                })
             })
     }
 })
+
+
 
 
 export const selectContacts = state => state.contact.contacts.items

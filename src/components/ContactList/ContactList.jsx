@@ -8,9 +8,9 @@ const ContactList = () => {
 
     return (
         <ul className={s.ul}>
-            {contacts.map(item => (
-                <li className={s.li} key={item.id}>
-                    <Contact name={item.name} phone={item.number} id={item.id} createdAt={item.createdAt}/>
+            {contacts.map(contact => (
+                <li className={s.li} key={contact.id}>
+                    <Contact contact={contact} createdAt={contact.createdAt}/>
                 </li>
             ))}
       </ul>

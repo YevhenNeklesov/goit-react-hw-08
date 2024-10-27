@@ -16,7 +16,7 @@ const HomePage = () => {
         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
         quasi. In deleniti eaque aut repudiandae et a id nisi.
       </p>
-      <Link to='/contacts' className="border-transparent bg-red-900 text-slate-100 px-20 py-3 rounded-md">Get Started</Link>
+      <Link to='/contacts' className="border-transparent hover:bg-red-700 bg-red-900 text-slate-100 px-20 py-3 rounded-md">Get Started</Link>
     </div>
   </div>
 </div>

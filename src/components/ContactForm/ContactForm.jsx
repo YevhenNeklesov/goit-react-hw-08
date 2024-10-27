@@ -2,6 +2,7 @@ import { Field, Form, Formik } from "formik"
 import { useDispatch } from "react-redux"
 import { addContact } from "../../redux/contacts/operations"
 import s from './ContactForm.module.css'
+import toast from "react-hot-toast"
 
 
 const ContactForm = () => {
@@ -9,8 +10,13 @@ const ContactForm = () => {
     const dispatch = useDispatch()
     
     const onSubmit = (values, options) => {
-        console.log(values);
-        dispatch(addContact(values))
+      if (!values.name || !values.number) {
+        return toast('Please fill the fields', {
+          icon: '🟡',
+          position: "bottom-left"
+        })
+      }
+      dispatch(addContact(values))
         options.resetForm()
         
     }
@@ -35,7 +41,7 @@ const ContactForm = () => {
           placeholder="Enter contact phone number" 
           className="input input-bordered text-black w-full max-w-xs"/>
         </label>
-        <button className="border-transparent bg-red-900 text-slate-100 px-20 m-auto  py-3 rounded-md" type="submit">Add contact</button>
+        <button className="border-transparent hover:bg-red-700 bg-red-900 text-slate-100 px-20 m-auto  py-3 rounded-md" type="submit">Add contact</button>
               </Form>
           </Formik>
     </div>

@@ -33,10 +33,10 @@ export const deleteContact = createAsyncThunk("contacts/deleteContact ", async (
 })
 
 
-export const patchContact = createAsyncThunk("contacts/patchContact ", async (body, thunkApi) => {
+export const patchContact = createAsyncThunk("contacts/patchContact", async ({id, ...body}, thunkApi) => {
     try {
         
-        const { data } = await goitApi.patch(`contacts/${body.id}`)
+        const { data } = await goitApi.patch(`/contacts/${id}`, body )
         return data
     } catch (err) {
         return thunkApi.rejectWithValue(err.message)

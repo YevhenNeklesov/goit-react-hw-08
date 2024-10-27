@@ -14,7 +14,6 @@ const LoginPage = () => {
   }
 
   const handleSubmit = (values, options) => {
-    console.log(values); 
     dispatch(login(values))
     options.resetForm()
   }
@@ -53,7 +52,7 @@ const LoginPage = () => {
         </svg>
         <Field name='password' type="password" className="grow" placeholder="Password" />
             </label>
-            <button className="border-transparent bg-red-900 text-slate-100 w-full py-3 rounded-md" type="submit">Sing up</button>
+            <button className="border-transparent hover:bg-red-700 bg-red-900 text-slate-100 w-full py-3 rounded-md" type="submit">Sing up</button>
             <p className="text-slate-100 text-xl">If you don`t have an account</p>
             <Link to='/register' className="text-2xl underline text-slate-100 font-bold hover:text-red-900 " type="submit">Register now</Link>
             
