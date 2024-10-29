@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import ContactForm from "../components/ContactForm/ContactForm"
 import ContactList from "../components/ContactList/ContactList"
 import SearchBox from "../components/SearchBox/SearchBox"
-import { selectContacts, selectError, selectLoading } from "../redux/contacts/slice"
+import { selectContacts, selectError, selectLoading } from "../redux/contacts/selectors"
 import { fetchContacts } from "../redux/contacts/operations"
 import { useEffect } from "react"
 
@@ -31,7 +31,7 @@ const ContactsPage = () => {
         <ContactForm />
           <SearchBox />
           <div>
-            {loading ? <span className=" pt-10 loading loading-ring loading-lg"></span>: (contacts.length > 0 ? <ContactList/> : <p className="font-bold text-3xl">You have no contact yet</p>)}
+            {loading ? <span className="loading loading-ring loading-lg"></span> : (contacts.length > 0 ? <ContactList/> : <p className="font-bold text-3xl">You have no contact yet</p>)}
             {err && <h2>Sorry we have some trouble</h2>}
             
         </div>

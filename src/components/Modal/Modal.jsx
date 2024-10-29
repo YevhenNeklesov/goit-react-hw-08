@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik"
 import { useDispatch } from "react-redux"
-import { fetchContacts, patchContact } from "../../redux/contacts/operations"
+import { patchContact } from "../../redux/contacts/operations"
 
 
 const Modal = ({contact}) => {
@@ -9,7 +9,6 @@ const Modal = ({contact}) => {
   const id = contact.id
   const onSubmit = async (values, options) => {
     await dispatch(patchContact({ id, name: values.name, number: values.number }))
-    dispatch(fetchContacts())
     options.formReset()
     }
   return (

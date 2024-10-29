@@ -1,11 +1,10 @@
 
-import { useDispatch, useSelector } from "react-redux"
-import { changeFilter, selectNameFilter } from "../../redux/filters/slice"
+import { useDispatch } from "react-redux"
+import { changeFilter } from "../../redux/filters/slice"
 import s from './SearchBox.module.css'
 
 const SearchBox = () => {
   const dispatch = useDispatch()
-  const filterName = useSelector(selectNameFilter)
   return (
     <div className={s.container}>
       <label className="form-control w-full max-w-xs m-auto">
@@ -14,7 +13,6 @@ const SearchBox = () => {
           type="text"
           placeholder="Enter contact name" 
           className="input input-bordered text-black w-full max-w-xs"
-          value={filterName}
           onChange={(e => dispatch(changeFilter(e.target.value)))} />
 </label>
     </div>

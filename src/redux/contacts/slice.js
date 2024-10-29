@@ -1,7 +1,9 @@
 import { createSelector, createSlice, isAnyOf } from "@reduxjs/toolkit"
 import {fetchContacts, addContact, deleteContact, patchContact} from './operations'
-import { selectNameFilter } from "../filters/slice"
 import toast from "react-hot-toast"
+import { logout } from "../auth/operations"
+import { selectContacts } from "./selectors"
+import { selectNameFilter } from "../filters/selectors"
 
 
 
@@ -37,13 +39,13 @@ const slice = createSlice({
                 })
             })
             .addCase(patchContact.fulfilled, (state, action) => {
-                const index = state.contacts.items.findIndex(item => item.id === action.payload)
-                state.contacts.items[index] = action.payload.id
-                
+                const index = state.contacts.items.findIndex(item => item.id === action.payload.id)
+                state.contacts.items[index] = action.payload
                 toast.success('Contact successfully edited.', {
                      position: "bottom-left"
                 })
             })
+            .addCase(logout.fulfilled, () => initialState)
 
             .addMatcher(isAnyOf(fetchContacts.pending, addContact.pending, deleteContact.pending, patchContact.pending), (state) => {
                 state.contacts.loading = true
@@ -64,9 +66,6 @@ const slice = createSlice({
 
 
 
-export const selectContacts = state => state.contact.contacts.items
-export const selectLoading = state => state.contact.contacts.loading
-export const selectError = state => state.contact.contacts.error
 
 export const selectFilteredContacts = createSelector([selectContacts, selectNameFilter], (contacts, str) => {
     return contacts.filter(contact => contact.name.toLowerCase().includes(str.toLowerCase().trim()) || contact.number.includes(str))
